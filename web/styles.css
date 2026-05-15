@@ -364,7 +364,7 @@ select {
 }
 
 .radar-card.overlay .radar-svg {
-  max-width: 220px;
+  max-width: 300px;
   margin: 0 auto;
 }
 
