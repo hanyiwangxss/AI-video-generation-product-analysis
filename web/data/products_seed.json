@@ -39,6 +39,29 @@
         "en": "Gen-4.5 is available across all paid Runway plans; limitations listed in the Gen-4.5 research post.",
         "zh": "Gen-4.5 在所有付费方案中可用；限制项见 Gen-4.5 研究文章。"
       },
+      "user_experience": {
+        "window": "last 6 months",
+        "summary": {
+          "en": "Reddit comparisons highlight strong camera controls but note robotic or floaty human motion.",
+          "zh": "Reddit 对比讨论认为镜头控制出色，但人物运动偏机械/漂浮。"
+        },
+        "ratings": {
+          "motion_realism": 2,
+          "prompt_adherence": null,
+          "control_tools": 4,
+          "stability_consistency": null,
+          "speed_queue": null,
+          "pricing_value": null
+        },
+        "sources": [
+          {
+            "title": "Reddit: Runway Gen-3 vs Kling AI (motion consistency)",
+            "url": "https://www.reddit.com/r/texttovideo/comments/1tdsgwd/runway_gen3_vs_kling_ai_which_has_better_motion/",
+            "date": "2026-05-15",
+            "platform": "Reddit"
+          }
+        ]
+      },
       "scores": {
         "quality": 5,
         "control": 4,
@@ -94,6 +117,22 @@
         "en": "Paid plans list commercial use and watermark-free downloads.",
         "zh": "付费方案标注可商用且可无水印下载。"
       },
+      "user_experience": {
+        "window": "last 6 months",
+        "summary": {
+          "en": "No recent public X/Reddit user-experience posts found in the last 6 months; ratings not available yet.",
+          "zh": "近 6 个月未检索到公开的 X/Reddit 用户体验帖子；暂无法给出评分。"
+        },
+        "ratings": {
+          "motion_realism": null,
+          "prompt_adherence": null,
+          "control_tools": null,
+          "stability_consistency": null,
+          "speed_queue": null,
+          "pricing_value": null
+        },
+        "sources": []
+      },
       "scores": {
         "quality": 4,
         "control": 3,
@@ -145,6 +184,22 @@
       "notes": {
         "en": "Pricing page lists per-second credit costs for video generation by model and resolution.",
         "zh": "定价页给出了不同模型与分辨率的按秒 credits 成本。"
+      },
+      "user_experience": {
+        "window": "last 6 months",
+        "summary": {
+          "en": "No recent public X/Reddit user-experience posts found in the last 6 months; ratings not available yet.",
+          "zh": "近 6 个月未检索到公开的 X/Reddit 用户体验帖子；暂无法给出评分。"
+        },
+        "ratings": {
+          "motion_realism": null,
+          "prompt_adherence": null,
+          "control_tools": null,
+          "stability_consistency": null,
+          "speed_queue": null,
+          "pricing_value": null
+        },
+        "sources": []
       },
       "scores": {
         "quality": 4,
@@ -198,6 +253,35 @@
         "en": "Homepage highlights the Kling 3.0 series and its multimodal capabilities.",
         "zh": "主页强调 Kling 3.0 系列与多模态能力。"
       },
+      "user_experience": {
+        "window": "last 6 months",
+        "summary": {
+          "en": "Reddit users report strong motion realism but note prompt adherence issues and occasional submission blocks/queue limits.",
+          "zh": "Reddit 用户反馈运动真实感较强，但提示词一致性偏弱，且偶有排队或无法提交的情况。"
+        },
+        "ratings": {
+          "motion_realism": 4,
+          "prompt_adherence": 2,
+          "control_tools": null,
+          "stability_consistency": null,
+          "speed_queue": 2,
+          "pricing_value": 2
+        },
+        "sources": [
+          {
+            "title": "Reddit: Runway Gen-3 vs Kling AI (motion consistency)",
+            "url": "https://www.reddit.com/r/texttovideo/comments/1tdsgwd/runway_gen3_vs_kling_ai_which_has_better_motion/",
+            "date": "2026-05-15",
+            "platform": "Reddit"
+          },
+          {
+            "title": "Reddit: Cannot use remaining Kling credits",
+            "url": "https://www.reddit.com/r/KLING/comments/1tds4at/cannot_use_remaining_top_up_credits_ive_paid_for/",
+            "date": "2026-05-15",
+            "platform": "Reddit"
+          }
+        ]
+      },
       "scores": {
         "quality": 4,
         "control": 4,
@@ -240,6 +324,22 @@
       "notes": {
         "en": "Users can export content via the sunset page while it is available.",
         "zh": "可在日落页面导出内容（如仍可用）。"
+      },
+      "user_experience": {
+        "window": "last 6 months",
+        "summary": {
+          "en": "No recent public X/Reddit user-experience posts found in the last 6 months; ratings not available yet.",
+          "zh": "近 6 个月未检索到公开的 X/Reddit 用户体验帖子；暂无法给出评分。"
+        },
+        "ratings": {
+          "motion_realism": null,
+          "prompt_adherence": null,
+          "control_tools": null,
+          "stability_consistency": null,
+          "speed_queue": null,
+          "pricing_value": null
+        },
+        "sources": []
       },
       "scores": {
         "quality": 4,

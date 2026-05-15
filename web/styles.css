@@ -246,6 +246,30 @@ select {
   font-size: 0.85rem;
 }
 
+.ux-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.ux-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--stroke);
+  background: #fff6ea;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.ux-item strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 .compare {
   margin-top: 60px;
 }
@@ -256,6 +280,27 @@ select {
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 16px;
+}
+
+.dimension-help {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 18px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.dimension-item {
+  background: #fff6ea;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 10px 12px;
+  line-height: 1.4;
+}
+
+.dimension-item strong {
+  color: var(--ink);
 }
 
 .toggle {
@@ -316,6 +361,11 @@ select {
 .radar-svg {
   width: 100%;
   height: auto;
+}
+
+.radar-card.overlay .radar-svg {
+  max-width: 220px;
+  margin: 0 auto;
 }
 
 .compare-row {

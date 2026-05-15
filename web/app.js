@@ -17,6 +17,7 @@ const cardsContainer = document.getElementById("cards");
 const compareRow = document.getElementById("compare-row");
 const radarBoard = document.getElementById("radar-board");
 const overlayToggle = document.getElementById("overlay-toggle");
+const dimensionHelp = document.getElementById("dimension-help");
 const productCount = document.getElementById("product-count");
 const sourceCount = document.getElementById("source-count");
 const lastUpdated = document.getElementById("last-updated");
@@ -30,6 +31,66 @@ const SCORE_DIMENSIONS = [
   { key: "ecosystem", label: { en: "Ecosystem", zh: "生态与集成" } },
   { key: "availability", label: { en: "Availability", zh: "可用性" } },
 ];
+const SCORE_DIMENSION_HELP = [
+  {
+    key: "quality",
+    text: {
+      en: "Visual fidelity, motion coherence, and artifact control.",
+      zh: "画面细节、运动连贯性与伪影控制。",
+    },
+  },
+  {
+    key: "control",
+    text: {
+      en: "Prompt following, editability, and fine-grained controls.",
+      zh: "提示词遵循、可编辑性与细粒度控制能力。",
+    },
+  },
+  {
+    key: "speed",
+    text: {
+      en: "Generation latency and overall throughput.",
+      zh: "生成时延与整体产出效率。",
+    },
+  },
+  {
+    key: "cost",
+    text: {
+      en: "Price relative to quality and output volume.",
+      zh: "成本与质量/产出效率的匹配度。",
+    },
+  },
+  {
+    key: "ecosystem",
+    text: {
+      en: "Integrations, workflows, and product ecosystem fit.",
+      zh: "工具链集成、流程支持与生态适配。",
+    },
+  },
+  {
+    key: "availability",
+    text: {
+      en: "Access, regional coverage, and waitlist constraints.",
+      zh: "可获得性、地区覆盖与排队限制。",
+    },
+  },
+];
+const UX_DIMENSIONS = [
+  { key: "motion_realism", label: { en: "Motion realism", zh: "运动真实感" } },
+  { key: "prompt_adherence", label: { en: "Prompt adherence", zh: "提示词一致性" } },
+  { key: "control_tools", label: { en: "Control tools", zh: "控制工具" } },
+  { key: "stability_consistency", label: { en: "Stability", zh: "稳定性" } },
+  { key: "speed_queue", label: { en: "Speed & queue", zh: "速度与排队" } },
+  { key: "pricing_value", label: { en: "Value for money", zh: "性价比" } },
+];
+const UX_SECTION_LABEL = {
+  en: "User experience (last 6 months)",
+  zh: "用户体验（近 6 个月）",
+};
+const UX_COMPARE_LABEL = {
+  en: "User experience (6 months)",
+  zh: "用户体验（近 6 个月）",
+};
 const MAX_SCORE = 5;
 const RADAR_COLORS = ["#d36b2c", "#2c5ad3", "#2c8f6b"];
 
@@ -41,6 +102,33 @@ const pickLang = (field, lang) => {
 };
 
 const joinList = (values) => (values && values.length ? values.join("; ") : "—");
+const formatRating = (value) =>
+  typeof value === "number" && !Number.isNaN(value) ? `${value}/${MAX_SCORE}` : "—";
+
+const getSourceCount = (product) => {
+  const base = (product.sources || []).length;
+  const ux = (product.user_experience && product.user_experience.sources) || [];
+  return base + ux.length;
+};
+
+const renderScoreHelp = () => {
+  if (!dimensionHelp) return;
+  dimensionHelp.innerHTML = SCORE_DIMENSIONS.map((dimension) => {
+    const help = SCORE_DIMENSION_HELP.find((item) => item.key === dimension.key);
+    const label = pickLang(dimension.label, state.lang);
+    const desc = pickLang(help && help.text, state.lang);
+    return `<div class="dimension-item"><strong>${label}:</strong> ${desc}</div>`;
+  }).join("");
+};
+
+const renderUxRatings = (ratings) => {
+  const data = ratings || {};
+  return UX_DIMENSIONS.map((dimension) => {
+    const label = pickLang(dimension.label, state.lang);
+    const value = formatRating(data[dimension.key]);
+    return `<div class="ux-item"><span>${label}</span><strong>${value}</strong></div>`;
+  }).join("");
+};
 
 const updateFilters = () => {
   const statuses = new Set();
@@ -83,6 +171,7 @@ const matchQuery = (product, query) => {
     joinList(product.limitations),
     joinList(product.use_cases),
     pickLang(product.notes, state.lang),
+    pickLang(product.user_experience && product.user_experience.summary, state.lang),
   ]
     .join(" ")
     .toLowerCase();
@@ -105,7 +194,7 @@ const applyFilters = () => {
   const sortMode = sortSelect.value;
   state.filtered.sort((a, b) => {
     if (sortMode === "sources") {
-      return (b.sources || []).length - (a.sources || []).length;
+      return getSourceCount(b) - getSourceCount(a);
     }
     return (pickLang(a.name, state.lang) || "").localeCompare(
       pickLang(b.name, state.lang) || ""
@@ -141,12 +230,26 @@ const renderCards = () => {
     const capabilities = pickLang(product.capabilities, state.lang) || "—";
     const pricing = pickLang(product.pricing, state.lang) || "—";
     const notes = pickLang(product.notes, state.lang) || "—";
+    const uxSummary = pickLang(
+      product.user_experience && product.user_experience.summary,
+      state.lang
+    );
+    const uxRatings = renderUxRatings(
+      product.user_experience && product.user_experience.ratings
+    );
 
     const badges = (product.category || [])
       .map((cat) => `<span class="badge">${cat}</span>`)
       .join("");
 
     const sources = (product.sources || [])
+      .map(
+        (src) =>
+          `<a href="${src.url}" target="_blank" rel="noreferrer">${src.title} (${src.date})</a>`
+      )
+      .join("");
+
+    const uxSources = ((product.user_experience && product.user_experience.sources) || [])
       .map(
         (src) =>
           `<a href="${src.url}" target="_blank" rel="noreferrer">${src.title} (${src.date})</a>`
@@ -166,9 +269,17 @@ const renderCards = () => {
       )}</div>
       <div class="card-section"><strong>Use cases:</strong> ${joinList(product.use_cases)}</div>
       <div class="card-section"><strong>Notes:</strong> ${notes}</div>
+      <div class="card-section"><strong>${pickLang(
+        UX_SECTION_LABEL,
+        state.lang
+      )}:</strong> ${uxSummary || "—"}</div>
+      <div class="ux-grid">${uxRatings}</div>
+      <div class="card-section"><strong>UX sources:</strong></div>
+      <div class="sources">${uxSources || "—"}</div>
+      <div class="card-section"><strong>Product sources:</strong></div>
       <div class="sources">${sources || "—"}</div>
       <div class="card-actions">
-        <span>${(product.sources || []).length} sources</span>
+        <span>${getSourceCount(product)} sources</span>
         <button class="compare-btn" data-id="${product.id}">Compare</button>
       </div>
     `;
@@ -198,6 +309,13 @@ const renderCompare = () => {
   selected.forEach((product) => {
     const card = document.createElement("div");
     card.className = "compare-card";
+    const uxSummary = pickLang(
+      product.user_experience && product.user_experience.summary,
+      state.lang
+    );
+    const uxRatings = renderUxRatings(
+      product.user_experience && product.user_experience.ratings
+    );
     card.innerHTML = `
       <h3>${pickLang(product.name, state.lang) || product.id}</h3>
       <div class="meta">${product.vendor} · ${product.status}</div>
@@ -206,6 +324,10 @@ const renderCompare = () => {
       <div class="meta">Pricing: ${pickLang(product.pricing, state.lang) || "—"}</div>
       <div class="meta">Limitations: ${joinList(product.limitations)}</div>
       <div class="meta">Use cases: ${joinList(product.use_cases)}</div>
+      <div class="meta">${pickLang(UX_COMPARE_LABEL, state.lang)}: ${
+        uxSummary || "—"
+      }</div>
+      <div class="ux-grid">${uxRatings}</div>
     `;
     compareRow.appendChild(card);
   });
@@ -296,7 +418,7 @@ const renderRadarBoard = (selected) => {
 
   if (state.overlay && entries.length > 1) {
     const card = document.createElement("div");
-    card.className = "radar-card";
+    card.className = "radar-card overlay";
     card.innerHTML = `<h3>Overlay radar</h3>`;
     card.appendChild(buildRadarSvg(entries, true));
 
@@ -327,7 +449,7 @@ const renderRadarBoard = (selected) => {
 const updateStats = () => {
   productCount.textContent = state.products.length;
   const sources = state.products.reduce(
-    (total, product) => total + (product.sources || []).length,
+    (total, product) => total + getSourceCount(product),
     0
   );
   sourceCount.textContent = sources;
@@ -341,12 +463,14 @@ const init = async () => {
   state.filtered = [...state.products];
   updateStats();
   updateFilters();
+  renderScoreHelp();
   applyFilters();
 };
 
 queryInput.addEventListener("input", applyFilters);
 languageSelect.addEventListener("change", (event) => {
   state.lang = event.target.value;
+  renderScoreHelp();
   applyFilters();
 });
 overlayToggle.addEventListener("change", (event) => {

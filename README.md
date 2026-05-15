@@ -2,6 +2,10 @@
 
 This is a minimal, local-first agent prototype for analyzing AI video generation products with bilingual output and source tracking.
 
+## Portfolio note (for HR)
+
+This is a portfolio demo to showcase product analysis and research workflows. I designed the bilingual data model, built the filtering/compare UI, and implemented source-linked cards so every claim is traceable. The project focuses on clarity, auditability, and fast iteration rather than production-scale infrastructure. Data comes from public sources and is time-stamped; some UX ratings are left blank when recent user reports are not available.
+
 ## What is included
 - Simple product schema validation
 - JSON-based data store (no external dependencies)
