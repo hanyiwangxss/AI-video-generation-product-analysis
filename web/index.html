@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Video Product Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Bilingual Competitive Intelligence</p>
+          <h1>AI Video Product Intelligence</h1>
+          <p class="subhead">
+            Compare video generation products with traceable sources, bilingual summaries,
+            and rapid filtering. Built for AI product strategy.
+          </p>
+          <div class="hero-actions">
+            <button class="ghost" id="scroll-to-results">Explore data</button>
+            <span class="stamp" id="last-updated">Last updated: --</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="metric">
+            <span class="label">Products tracked</span>
+            <strong id="product-count">0</strong>
+          </div>
+          <div class="metric">
+            <span class="label">Sources linked</span>
+            <strong id="source-count">0</strong>
+          </div>
+          <div class="metric">
+            <span class="label">Bilingual fields</span>
+            <strong>EN / 中文</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="controls" id="controls">
+        <div class="control-group">
+          <label for="query">Search / 搜索</label>
+          <input id="query" type="text" placeholder="pricing, prompt adherence, 文生视频..." />
+        </div>
+        <div class="control-row">
+          <div class="control-group">
+            <label for="language">Language / 语言</label>
+            <select id="language">
+              <option value="en">English</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="status">Status</label>
+            <select id="status">
+              <option value="all">All</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="all">All</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="sort">Sort</label>
+            <select id="sort">
+              <option value="name">Name</option>
+              <option value="sources">Sources</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="results" id="results">
+        <div class="section-title">
+          <h2>Product Cards</h2>
+          <p>Structured snapshots with sources for every key claim.</p>
+        </div>
+        <div class="cards" id="cards"></div>
+      </section>
+
+      <section class="compare" id="compare">
+        <div class="section-title">
+          <h2>Comparison Board</h2>
+          <p>Select up to three products for side-by-side analysis.</p>
+        </div>
+        <div class="compare-row" id="compare-row"></div>
+      </section>
+
+      <footer class="footer">
+        <p>
+          Built as an AI product manager portfolio demo. Data is sourced and time-stamped for
+          auditability.
+        </p>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
