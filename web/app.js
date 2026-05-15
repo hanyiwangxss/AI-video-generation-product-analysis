@@ -5,6 +5,7 @@ const state = {
   filtered: [],
   compare: new Set(),
   lang: "en",
+  overlay: false,
 };
 
 const queryInput = document.getElementById("query");
@@ -14,10 +15,23 @@ const categorySelect = document.getElementById("category");
 const sortSelect = document.getElementById("sort");
 const cardsContainer = document.getElementById("cards");
 const compareRow = document.getElementById("compare-row");
+const radarBoard = document.getElementById("radar-board");
+const overlayToggle = document.getElementById("overlay-toggle");
 const productCount = document.getElementById("product-count");
 const sourceCount = document.getElementById("source-count");
 const lastUpdated = document.getElementById("last-updated");
 const scrollButton = document.getElementById("scroll-to-results");
+
+const SCORE_DIMENSIONS = [
+  { key: "quality", label: { en: "Output quality", zh: "画质表现" } },
+  { key: "control", label: { en: "Control", zh: "可控性" } },
+  { key: "speed", label: { en: "Speed", zh: "速度" } },
+  { key: "cost", label: { en: "Cost efficiency", zh: "成本效率" } },
+  { key: "ecosystem", label: { en: "Ecosystem", zh: "生态与集成" } },
+  { key: "availability", label: { en: "Availability", zh: "可用性" } },
+];
+const MAX_SCORE = 5;
+const RADAR_COLORS = ["#d36b2c", "#2c5ad3", "#2c8f6b"];
 
 const pickLang = (field, lang) => {
   if (!field) return "";
@@ -175,8 +189,11 @@ const renderCompare = () => {
 
   if (!selected.length) {
     compareRow.innerHTML = '<div class="compare-card">Select products to compare.</div>';
+    radarBoard.innerHTML = '<div class="radar-card">Select products to view radar.</div>';
     return;
   }
+
+  renderRadarBoard(selected);
 
   selected.forEach((product) => {
     const card = document.createElement("div");
@@ -191,6 +208,119 @@ const renderCompare = () => {
       <div class="meta">Use cases: ${joinList(product.use_cases)}</div>
     `;
     compareRow.appendChild(card);
+  });
+};
+
+const buildRadarSvg = (products, overlay) => {
+  const size = 240;
+  const center = size / 2;
+  const radius = 80;
+  const levels = MAX_SCORE;
+  const dims = SCORE_DIMENSIONS.length;
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
+  svg.setAttribute("class", "radar-svg");
+
+  const gridGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  gridGroup.setAttribute("fill", "none");
+  gridGroup.setAttribute("stroke", "#e4d8c8");
+  gridGroup.setAttribute("stroke-width", "1");
+
+  for (let level = 1; level <= levels; level += 1) {
+    const r = (radius * level) / levels;
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", center.toString());
+    circle.setAttribute("cy", center.toString());
+    circle.setAttribute("r", r.toString());
+    gridGroup.appendChild(circle);
+  }
+
+  SCORE_DIMENSIONS.forEach((dimension, index) => {
+    const angle = (Math.PI * 2 * index) / dims - Math.PI / 2;
+    const x = center + radius * Math.cos(angle);
+    const y = center + radius * Math.sin(angle);
+    const axis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    axis.setAttribute("x1", center.toString());
+    axis.setAttribute("y1", center.toString());
+    axis.setAttribute("x2", x.toString());
+    axis.setAttribute("y2", y.toString());
+    axis.setAttribute("stroke", "#d9cbbb");
+    axis.setAttribute("stroke-width", "1");
+    gridGroup.appendChild(axis);
+
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    const labelOffset = 16;
+    label.setAttribute("x", (center + (radius + labelOffset) * Math.cos(angle)).toString());
+    label.setAttribute("y", (center + (radius + labelOffset) * Math.sin(angle)).toString());
+    label.setAttribute("text-anchor", "middle");
+    label.setAttribute("dominant-baseline", "middle");
+    label.setAttribute("font-size", "10");
+    label.setAttribute("fill", "#5b5146");
+    label.textContent = pickLang(dimension.label, state.lang);
+    gridGroup.appendChild(label);
+  });
+
+  svg.appendChild(gridGroup);
+
+  products.forEach((entry, index) => {
+    const product = entry.product;
+    const scores = product.scores || {};
+    const points = SCORE_DIMENSIONS.map((dimension, dimIndex) => {
+      const angle = (Math.PI * 2 * dimIndex) / dims - Math.PI / 2;
+      const raw = Number(scores[dimension.key] || 0);
+      const score = Math.min(MAX_SCORE, Math.max(0, raw));
+      const r = (radius * score) / MAX_SCORE;
+      const x = center + r * Math.cos(angle);
+      const y = center + r * Math.sin(angle);
+      return `${x},${y}`;
+    }).join(" ");
+
+    const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+    polygon.setAttribute("points", points);
+    polygon.setAttribute("fill", entry.color);
+    polygon.setAttribute("stroke", entry.color);
+    polygon.setAttribute("stroke-width", "2");
+    polygon.setAttribute("fill-opacity", overlay ? "0.18" : "0.35");
+    svg.appendChild(polygon);
+  });
+
+  return svg;
+};
+
+const renderRadarBoard = (selected) => {
+  radarBoard.innerHTML = "";
+  const entries = selected.map((product, index) => ({
+    product,
+    color: RADAR_COLORS[index % RADAR_COLORS.length],
+  }));
+
+  if (state.overlay && entries.length > 1) {
+    const card = document.createElement("div");
+    card.className = "radar-card";
+    card.innerHTML = `<h3>Overlay radar</h3>`;
+    card.appendChild(buildRadarSvg(entries, true));
+
+    const legend = document.createElement("div");
+    legend.className = "radar-legend";
+    entries.forEach((entry) => {
+      const item = document.createElement("div");
+      item.className = "legend-item";
+      item.innerHTML = `<span class="legend-swatch" style="background:${entry.color}"></span>${
+        pickLang(entry.product.name, state.lang) || entry.product.id
+      }`;
+      legend.appendChild(item);
+    });
+    card.appendChild(legend);
+    radarBoard.appendChild(card);
+    return;
+  }
+
+  entries.forEach((entry) => {
+    const card = document.createElement("div");
+    card.className = "radar-card";
+    card.innerHTML = `<h3>${pickLang(entry.product.name, state.lang) || entry.product.id}</h3>`;
+    card.appendChild(buildRadarSvg([entry], false));
+    radarBoard.appendChild(card);
   });
 };
 
@@ -218,6 +348,10 @@ queryInput.addEventListener("input", applyFilters);
 languageSelect.addEventListener("change", (event) => {
   state.lang = event.target.value;
   applyFilters();
+});
+overlayToggle.addEventListener("change", (event) => {
+  state.overlay = event.target.checked;
+  renderCompare();
 });
 statusSelect.addEventListener("change", applyFilters);
 categorySelect.addEventListener("change", applyFilters);

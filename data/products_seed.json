@@ -39,6 +39,14 @@
         "en": "Gen-4.5 is available across all paid Runway plans; limitations listed in the Gen-4.5 research post.",
         "zh": "Gen-4.5 在所有付费方案中可用；限制项见 Gen-4.5 研究文章。"
       },
+      "scores": {
+        "quality": 5,
+        "control": 4,
+        "speed": 4,
+        "cost": 3,
+        "ecosystem": 4,
+        "availability": 4
+      },
       "sources": [
         {
           "title": "Runway Pricing",
@@ -86,6 +94,14 @@
         "en": "Paid plans list commercial use and watermark-free downloads.",
         "zh": "付费方案标注可商用且可无水印下载。"
       },
+      "scores": {
+        "quality": 4,
+        "control": 3,
+        "speed": 4,
+        "cost": 4,
+        "ecosystem": 3,
+        "availability": 4
+      },
       "sources": [
         {
           "title": "Pika Subscription Pricing",
@@ -129,6 +145,14 @@
       "notes": {
         "en": "Pricing page lists per-second credit costs for video generation by model and resolution.",
         "zh": "定价页给出了不同模型与分辨率的按秒 credits 成本。"
+      },
+      "scores": {
+        "quality": 4,
+        "control": 4,
+        "speed": 3,
+        "cost": 3,
+        "ecosystem": 5,
+        "availability": 4
       },
       "sources": [
         {
@@ -174,6 +198,14 @@
         "en": "Homepage highlights the Kling 3.0 series and its multimodal capabilities.",
         "zh": "主页强调 Kling 3.0 系列与多模态能力。"
       },
+      "scores": {
+        "quality": 4,
+        "control": 4,
+        "speed": 4,
+        "cost": 3,
+        "ecosystem": 3,
+        "availability": 3
+      },
       "sources": [
         {
           "title": "Kling AI Homepage",
@@ -208,6 +240,14 @@
       "notes": {
         "en": "Users can export content via the sunset page while it is available.",
         "zh": "可在日落页面导出内容（如仍可用）。"
+      },
+      "scores": {
+        "quality": 4,
+        "control": 3,
+        "speed": 3,
+        "cost": 2,
+        "ecosystem": 2,
+        "availability": 1
       },
       "sources": [
         {
