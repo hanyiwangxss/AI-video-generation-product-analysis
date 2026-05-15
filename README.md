@@ -33,6 +33,9 @@ Then open:
 http://localhost:8000/web/
 ```
 
+The web UI reads data from `web/data/products_seed.json`. Keep it in sync with
+`data/products_seed.json` when you update content.
+
 You can also specify a custom data file:
 
 ```bash

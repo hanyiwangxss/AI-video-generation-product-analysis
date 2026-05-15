@@ -1,4 +1,4 @@
-const dataUrl = "../data/products_seed.json";
+const dataUrl = "data/products_seed.json";
 
 const state = {
   products: [],

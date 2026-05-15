@@ -1,0 +1,221 @@
+{
+  "products": [
+    {
+      "id": "runway",
+      "name": {
+        "en": "Runway",
+        "zh": "Runway"
+      },
+      "vendor": "Runway AI",
+      "status": "public pricing available",
+      "category": ["text-to-video", "image-to-video", "video-editing", "performance-capture"],
+      "capabilities": {
+        "en": [
+          "Gen-4.5 text-to-video model with high visual fidelity and prompt adherence",
+          "Gen-4 image-to-video",
+          "Aleph video editing model",
+          "Act-Two performance capture",
+          "Access to third-party video models on paid plans"
+        ],
+        "zh": [
+          "Gen-4.5 文生视频模型，强调高画质与提示词一致性",
+          "Gen-4 图生视频",
+          "Aleph 视频编辑模型",
+          "Act-Two 表演捕捉",
+          "付费方案可使用第三方视频模型"
+        ]
+      },
+      "pricing": {
+        "en": "Free: 125 one-time credits. Standard: $12/user/month billed yearly. Pro: $28/user/month billed yearly. Unlimited: $76/user/month billed yearly. Enterprise: contact sales.",
+        "zh": "免费方案含一次性 125 credits。Standard：$12/人/月（年付）。Pro：$28/人/月（年付）。Unlimited：$76/人/月（年付）。Enterprise：联系销售。"
+      },
+      "limitations": [
+        "Causal reasoning errors may occur (effects preceding causes)",
+        "Object permanence issues across frames",
+        "Success bias in action outcomes"
+      ],
+      "use_cases": [],
+      "notes": {
+        "en": "Gen-4.5 is available across all paid Runway plans; limitations listed in the Gen-4.5 research post.",
+        "zh": "Gen-4.5 在所有付费方案中可用；限制项见 Gen-4.5 研究文章。"
+      },
+      "sources": [
+        {
+          "title": "Runway Pricing",
+          "url": "https://runwayml.com/pricing",
+          "date": "2026-05-15"
+        },
+        {
+          "title": "Runway Gen-4.5: Best-in-class AI video generation model",
+          "url": "https://runwayml.com/research/introducing-runway-gen-4.5",
+          "date": "2026-05-15"
+        }
+      ]
+    },
+    {
+      "id": "pika",
+      "name": {
+        "en": "Pika",
+        "zh": "Pika"
+      },
+      "vendor": "Pika Labs",
+      "status": "public pricing available",
+      "category": ["text-to-video", "image-to-video"],
+      "capabilities": {
+        "en": [
+          "Pika 2.5 model with multi-feature suite (Pikaframes, Pikascenes, Pikadditions, Pikaswaps, Pikatwists, Pikaffects)",
+          "Text-to-video and image-to-video credit-based generation",
+          "Pikaformance audio feature (credit per second)"
+        ],
+        "zh": [
+          "Pika 2.5 模型及多功能套件（Pikaframes、Pikascenes、Pikadditions、Pikaswaps、Pikatwists、Pikaffects）",
+          "文生视频与图生视频的 credits 计费",
+          "Pikaformance 音频功能（按秒计费）"
+        ]
+      },
+      "pricing": {
+        "en": "Free plan available. Basic $8/month billed yearly (80 monthly credits). Standard $28/month billed yearly (700 credits). Pro $76/month billed yearly (2300 credits).",
+        "zh": "提供免费方案。Basic：$8/ 月（年付，80 月度 credits）。Standard：$28/ 月（年付，700 credits）。Pro：$76/ 月（年付，2300 credits）。"
+      },
+      "limitations": [
+        "Basic plan limited to 480p for Pika 2.5",
+        "Some features listed as image-to-video only in Basic"
+      ],
+      "use_cases": [],
+      "notes": {
+        "en": "Paid plans list commercial use and watermark-free downloads.",
+        "zh": "付费方案标注可商用且可无水印下载。"
+      },
+      "sources": [
+        {
+          "title": "Pika Subscription Pricing",
+          "url": "https://pika.art/pricing",
+          "date": "2026-05-15"
+        }
+      ]
+    },
+    {
+      "id": "luma",
+      "name": {
+        "en": "Luma",
+        "zh": "Luma"
+      },
+      "vendor": "Luma AI",
+      "status": "public pricing available",
+      "category": ["text-to-video", "image-to-video", "video-to-video", "multi-modal"],
+      "capabilities": {
+        "en": [
+          "Luma Agents for multimodal workflows across image, video, audio, and text",
+          "Ray3.14 supports text-to-video, image-to-video, and video-to-video with credit-based costs",
+          "Access to multiple models including Ray3.14, Kling, and Veo via credits"
+        ],
+        "zh": [
+          "Luma Agents 支持图像、视频、音频与文本的多模态工作流",
+          "Ray3.14 支持文生视频、图生视频与视频到视频，并按 credits 计费",
+          "通过 credits 访问多模型（如 Ray3.14、Kling、Veo）"
+        ]
+      },
+      "pricing": {
+        "en": "Plus $30/month. Pro $90/month. Ultra $300/month. Team and Enterprise available by contact.",
+        "zh": "Plus：$30/月。Pro：$90/月。Ultra：$300/月。Team 与 Enterprise 需联系销售。"
+      },
+      "limitations": [],
+      "use_cases": [
+        "Social media video ads",
+        "Storyboards and concept development",
+        "Video localization",
+        "Podcast clips to video"
+      ],
+      "notes": {
+        "en": "Pricing page lists per-second credit costs for video generation by model and resolution.",
+        "zh": "定价页给出了不同模型与分辨率的按秒 credits 成本。"
+      },
+      "sources": [
+        {
+          "title": "Luma Plans & Pricing",
+          "url": "https://lumalabs.ai/pricing",
+          "date": "2026-05-15"
+        },
+        {
+          "title": "Luma App - Creative agents and use cases",
+          "url": "https://lumalabs.ai/app",
+          "date": "2026-05-15"
+        }
+      ]
+    },
+    {
+      "id": "kling",
+      "name": {
+        "en": "Kling",
+        "zh": "可灵"
+      },
+      "vendor": "Kuaishou",
+      "status": "available (create now)",
+      "category": ["text-to-video", "image-to-video", "audio", "storyboard"],
+      "capabilities": {
+        "en": [
+          "Kling 3.0 model series with multimodal instruction parsing",
+          "Long-form storyboard control and multi-scene transitions",
+          "Native audio features and binding of visual identity with vocal tone"
+        ],
+        "zh": [
+          "Kling 3.0 系列模型支持多模态指令解析",
+          "支持长故事板控制与多场景转场",
+          "支持原生音频与视觉身份/声线绑定"
+        ]
+      },
+      "pricing": {
+        "en": "Pricing not listed on the public homepage.",
+        "zh": "公开主页未列出定价信息。"
+      },
+      "limitations": [],
+      "use_cases": [],
+      "notes": {
+        "en": "Homepage highlights the Kling 3.0 series and its multimodal capabilities.",
+        "zh": "主页强调 Kling 3.0 系列与多模态能力。"
+      },
+      "sources": [
+        {
+          "title": "Kling AI Homepage",
+          "url": "https://kling.ai/",
+          "date": "2026-05-15"
+        }
+      ]
+    },
+    {
+      "id": "sora",
+      "name": {
+        "en": "Sora",
+        "zh": "Sora"
+      },
+      "vendor": "OpenAI",
+      "status": "discontinued (web/app); API sunset scheduled",
+      "category": ["text-to-video"],
+      "capabilities": {
+        "en": [],
+        "zh": []
+      },
+      "pricing": {
+        "en": "Not applicable due to discontinuation.",
+        "zh": "因停用不适用。"
+      },
+      "limitations": [
+        "Sora web and app discontinued on 2026-04-26",
+        "Sora API scheduled for discontinuation on 2026-09-24",
+        "Data is deleted after the final export window (if offered)"
+      ],
+      "use_cases": [],
+      "notes": {
+        "en": "Users can export content via the sunset page while it is available.",
+        "zh": "可在日落页面导出内容（如仍可用）。"
+      },
+      "sources": [
+        {
+          "title": "What to know about the Sora discontinuation",
+          "url": "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation",
+          "date": "2026-05-15"
+        }
+      ]
+    }
+  ]
+}
